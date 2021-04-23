@@ -5,20 +5,30 @@ public:
             return head;
         else if(!head->next)
             return head;
-        vector<int> nums;
+        ListNode * prev = NULL;
         ListNode * current = head;
+        ListNode * temp = current->next;
         while(current != NULL) {
-            nums.push_back(current->val);
-            current = current->next;
+            temp = current->next;
+            current->next = prev;
+            prev = current;
+            current = temp; 
         }
-        int len = nums.size()-1;
-        current = head;
-        int index = len;
-        while(index >= 0) {
-            current->val = nums[index];
-            current = current->next;
-            --index;
-        }
-        return head;
+        return prev;
+        // vector<int> nums;
+        // ListNode * current = head;
+        // while(current != NULL) {
+        //     nums.push_back(current->val);
+        //     current = current->next;
+        // }
+        // int len = nums.size()-1;
+        // current = head;
+        // int index = len;
+        // while(index >= 0) {
+        //     current->val = nums[index];
+        //     current = current->next;
+        //     --index;
+        // }
+        // return head;
     }
 };
