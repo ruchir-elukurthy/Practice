@@ -11,30 +11,27 @@ public:
                 for(i = left; i <= right; i++) {
                     result.push_back(matrix[top][i]);
                 }
-                ++dir;
                 ++top;
             }
             if(dir == 1) {
                 for(i = top; i <= bottom; i++) {
                     result.push_back(matrix[i][right]);
                 }
-                ++dir;
                 --right;
             }
             if(dir == 2) {
                 for(i = right; i >= left; i--) {
                     result.push_back(matrix[bottom][i]);
-                }  
-                ++dir;
+                }
                 --bottom;
             }
             if(dir == 3) {
                 for(i = bottom; i >= top; i--) {
-                    result.push_back(matrix[i][bottom]);
+                    result.push_back(matrix[i][left]);
                 }
-                dir = 0;
                 ++left; 
             }
+            dir = (dir+1) % 4;
         }
         return result;
         
