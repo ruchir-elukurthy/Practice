@@ -3,31 +3,30 @@ public:
     ListNode* oddEvenList(ListNode* head) {
         if(!head)
             return head;
-        vector <int> odd_index_nums;
-        vector <int> even_index_nums;
+        ListNode * odd_head = new ListNode(-1);
+        ListNode * even_head = new ListNode(-2);
+        ListNode * even = even_head;
+        ListNode * odd = odd_head;
         ListNode * current = head;
+        ListNode * hold = head;
         int count = 1;
         while(current != NULL) {
-            if(count % 2 == 1)
-                odd_index_nums.push_back(current->val);
-            else
-                even_index_nums.push_back(current->val);
+            if(count % 2 == 0) {
+                even->next = current;
+                even = even->next;
+                hold = even->next;
+                even->next = NULL;
+            }
+            else {
+                odd->next = current;
+                odd = odd->next;
+                hold = odd->next;
+                odd->next = NULL;
+            }
             ++count;
-            current = current->next;
+            current = hold;
         }
-        current = head;
-        int index = 0;
-        while(index < odd_index_nums.size()) {
-            current->val = odd_index_nums[index];
-            ++index;
-            current = current->next;
-        }
-        index = 0;
-        while(index < even_index_nums.size()) {
-            current->val = even_index_nums[index];
-            ++index;
-            current = current->next;
-        }
-        return head;
+        odd->next = even_head->next;
+        return odd_head->next;
     }
 };
