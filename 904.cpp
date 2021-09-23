@@ -12,15 +12,12 @@ public:
                 ++count_fruits[fruits[right]];
             }
             ++sum;
-            if(count_fruits.size() == 3) {
-                while(true) {
-                    --count_fruits[fruits[left]];
-                    --sum;
-                    if(count_fruits[fruits[left]] == 0)
-                        break;
-                    ++left;
+            while(count_fruits.size() == 3) {
+                --count_fruits[fruits[left]];
+                --sum;
+                if(count_fruits[fruits[left]] == 0) {
+                    count_fruits.erase(fruits[left]);
                 }
-                count_fruits.erase(fruits[left]);
                 ++left;
             }
             max_fruits = max(max_fruits, sum);
