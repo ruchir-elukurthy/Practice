@@ -23,3 +23,36 @@ public:
     }
         
 };
+
+//Optimal
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        int len = nums.size();
+        sort(nums.begin(), nums.end());
+        if(len <= 2)
+            return result;
+        for(int i = 0; i < len; ++i) {
+            if((i == 0) || (nums[i] != nums[i-1])) {
+                int low = i+1;
+                int high = len-1;
+                while(low < high) {
+                    if(nums[i]+nums[low]+nums[high] == 0) {
+                        result.push_back({nums[i],nums[low],nums[high]});
+                        while(low < high && nums[low] == nums[low+1]) ++low;
+                        while(low < high && nums[high] == nums[high-1]) --high;
+                        ++low;
+                        --high;
+                    }
+                    else if(nums[i]+nums[low]+nums[high] > 0)
+                        --high;
+                    else
+                        ++low;
+                }
+            }
+        }
+        
+        return result;
+    }
+};
