@@ -21,3 +21,28 @@ public:
         return product;
     }
 };
+
+
+//efficient
+
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int length_nums = nums.size();
+        if(length_nums == 1)
+            return nums;
+        vector<int> output(length_nums, 1);
+        int product = 1;
+        int prev = nums[0];
+        for(int i = 1; i < length_nums; ++i) {
+            output[i] = prev;
+            prev *= nums[i];
+        }
+        prev = nums[length_nums-1];
+        for(int i = length_nums-2; i >= 0; --i) {
+            output[i] *= prev;
+            prev *= nums[i];
+        }
+        return output;
+    }
+};
